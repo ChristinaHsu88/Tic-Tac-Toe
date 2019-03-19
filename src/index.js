@@ -15,16 +15,26 @@ class Square extends React.Component {
   }
 }
 
-class Board extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      squares: Array(9).fill(null)  /* set the initial state as null and be changed later when input is entered */
-    }
-  }
+function Square(props) {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  )
+}
+
+/* replaced with function component as above */
+/* class Board extends React.Component {
+/*   constructor(props) {
+/*    super(props)
+/*    this.state = {
+/*      squares: Array(9).fill(null)  /* set the initial state as null and be changed later when input is entered */
+/*    }
+/*  } */
+
 
   handleClick(i) {
-    const squares = this.state.squares.slice() /* make a copy of the array */
+    const squares = this.state.squares.slice() /* make a copy of the array to modify the data instead of modifying it directly to the original array */
     squares[i] = 'X'
     this.setState({squares: squares})
   }
