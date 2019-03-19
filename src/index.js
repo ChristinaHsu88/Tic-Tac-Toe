@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 
+/* replaced with function component as below 
 class Square extends React.Component {
   render() {
     return (            
@@ -14,6 +15,7 @@ class Square extends React.Component {
     ) 
   }
 }
+*/
 
 function Square(props) {
   return (
@@ -23,21 +25,25 @@ function Square(props) {
   )
 }
 
-/* replaced with function component as above */
-/* class Board extends React.Component {
-/*   constructor(props) {
-/*    super(props)
-/*    this.state = {
-/*      squares: Array(9).fill(null)  /* set the initial state as null and be changed later when input is entered */
-/*    }
-/*  } */
 
+class Board extends React.Component {
+  constructor(props) {
+  super(props)
+  this.state = {
+    squares: Array(9).fill(null),  /* set the initial state as null and be changed later when input is entered */
+    xIsNext: true
+    }
+  }
 
   handleClick(i) {
     const squares = this.state.squares.slice() /* make a copy of the array to modify the data instead of modifying it directly to the original array */
-    squares[i] = 'X'
-    this.setState({squares: squares})
+    squares[i] = this.state.xIsNext ? 'X' : 'O'
+    this.setState({
+      squares: squares,
+      xIsNext: !this.state.xIsNext /* tracking the changing state of xIsNext */
+    })
   }
+
   renderSquare(i) {
     return (
       <Square 
